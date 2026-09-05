@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Broadcast - Bot Control Panel{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4"><i class="bi bi-broadcast"></i> Broadcast Message</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0"><i class="bi bi-megaphone"></i> Send Broadcast</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('broadcast') }}" 
+                      onsubmit="return confirm('Are you sure you want to send broadcast to all these numbers?');">
+                    <div class="mb-3">
+                        <label for="numbers" class="form-label">Phone Numbers</label>
+                        <textarea class="form-control" id="numbers" name="numbers" rows="5" 
+                                  placeholder="6281234567890, 6289876543210, 628111222333" required></textarea>
+                        <small class="form-text text-muted">
+                            Enter phone numbers separated by commas. One number per line or comma-separated.
+                            <br>Example: 6281234567890, 6289876543210, 628111222333
+                        </small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" 
+                                  placeholder="Enter your broadcast message here..." required></textarea>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> 
+                        <strong>Note:</strong> Messages will be sent one by one with a small delay between each send to avoid rate limiting.
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-send"></i> Send Broadcast
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,28 @@
+{
+  "6282392115909@s.whatsapp.net": {
+    "id": "6282392115909@s.whatsapp.net",
+    "name": "Unknown",
+    "totalMessages": 26,
+    "totalCommands": 13,
+    "firstSeen": "2025-12-30T14:31:56.340Z",
+    "lastSeen": "2025-12-30T14:57:59.439Z",
+    "isBanned": false,
+    "isPremium": false,
+    "exp": 65,
+    "level": 1,
+    "balance": 0
+  },
+  "120363403409234292@newsletter": {
+    "id": "120363403409234292@newsletter",
+    "name": "Unknown",
+    "totalMessages": 9,
+    "totalCommands": 0,
+    "firstSeen": "2025-12-30T14:35:48.840Z",
+    "lastSeen": "2025-12-30T14:59:47.955Z",
+    "isBanned": false,
+    "isPremium": false,
+    "exp": 0,
+    "level": 1,
+    "balance": 0
+  }
+}

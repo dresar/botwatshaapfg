@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Bot Control Panel{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4"><i class="bi bi-speedometer2"></i> Dashboard</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> Bot Status</h5>
+            </div>
+            <div class="card-body">
+                {% if bot_online %}
+                    <div class="mb-3">
+                        <strong>Connection Status:</strong>
+                        {% if connection_status == 'connected' %}
+                            <span class="badge bg-success">Connected</span>
+                        {% elif connection_status == 'connecting' %}
+                            <span class="badge bg-warning">Connecting</span>
+                        {% else %}
+                            <span class="badge bg-danger">Disconnected</span>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        <strong>Uptime:</strong> <span id="uptime">{{ uptime }}</span>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Status:</strong>
+                        <span class="badge bg-success">Online</span>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle"></i> Bot Offline
+                    </div>
+                    <p class="text-muted">Cannot connect to bot API. Please check if bot is running.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-qr-code"></i> QR Code</h5>
+            </div>
+            <div class="card-body text-center">
+                {% if qr_code and qr_code != 'Connected - No QR needed' and qr_code != 'Need Scan' %}
+                    <img src="{{ qr_code }}" alt="QR Code" class="img-fluid mb-3" style="max-width: 300px;">
+                    <p class="text-muted">Scan this QR code with WhatsApp to connect</p>
+                {% elif connection_status == 'connected' %}
+                    <div class="alert alert-success">
+                        <i class="bi bi-check-circle"></i> Bot is connected. No QR code needed.
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i> QR code not available. Bot may be offline or already connected.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="bi bi-arrow-clockwise"></i> Bot Control</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('restart_bot') }}" onsubmit="return confirm('Are you sure you want to restart the bot?');">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-arrow-clockwise"></i> Restart Bot
+                    </button>
+                </form>
+                <small class="text-muted d-block mt-2">This will send a restart command to the bot. The bot process will be terminated and restarted by PM2.</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
